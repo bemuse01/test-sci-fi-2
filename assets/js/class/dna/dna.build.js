@@ -11,7 +11,7 @@ CLASS.object.dna.build = class{
         this.param = {
             body: {
                 big: new PARAM.object.dna.body(), 
-                small: new PARAM.object.dna.body({size: 1.125, rand: {bone: 5.0, nucleic: 4.0}, point: 60})
+                small: new PARAM.object.dna.body({size: 1.125, rand: {bone: 8.0, nucleic: 7.0}, point: 60})
             }
         }
 
@@ -38,11 +38,12 @@ CLASS.object.dna.build = class{
         this.element = document.querySelector('.ui-dna-object')
 
         const {width, height} = this.element.getBoundingClientRect()
-        const camera = new PARAM.object.app()
+        const camera = new PARAM.object.app({cameraPos: 150})
 
         this.scene = new THREE.Scene()
         this.camera = new THREE.PerspectiveCamera(camera.fov, width / height, camera.near, camera.far)
         this.camera.position.z = camera.cameraPos
+        console.log(width, height)
     }
     #initComposer(app){
         this.bloom = 1.25
@@ -110,7 +111,7 @@ CLASS.object.dna.build = class{
         this.#rotateY()
     }
     #rotateY(){
-        this.build.rotation.y += 0.02
+        this.build.rotation.x += 0.02
     }
 
 

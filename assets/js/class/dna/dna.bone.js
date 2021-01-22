@@ -17,6 +17,7 @@ CLASS.object.dna.bone = class{
         const material = this.#createMaterial(param)
         this.mesh = new THREE.Points(geometry, material)
         this.mesh.rotation.x = 90 * radian
+        this.mesh.rotation.y = 90 * radian
         this.mesh.layers.set(param.layers)
     }
 

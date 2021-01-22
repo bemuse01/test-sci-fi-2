@@ -19,8 +19,6 @@ CLASS.object.app.build = class{
         this.param.camera = new THREE.PerspectiveCamera(this.param.fov, PARAM.util.width / PARAM.util.height, this.param.near, this.param.far)
         this.param.camera.position.z = this.param.cameraPos
         this.param.scene.add(this.param.camera)
-
-        // this.param.scene.add(new THREE.Mesh(new THREE.BoxGeometry(10, 10, 10), new THREE.MeshBasicMaterial))
     }
 
     animate(){
@@ -38,15 +36,20 @@ CLASS.object.app.build = class{
             if(i === 'app') continue
             const {scene, camera, element, composer} = COMP.object[i]
 
-            const {left, top, width, height} = element.getBoundingClientRect()
+            // const {left, bottom, width, height} = element.getBoundingClientRect()
+            const rect = element.getBoundingClientRect()
+            const width = rect.right - rect.left;
+            const height = rect.bottom - rect.top;
+            const left = rect.left;
+            const bottom = this.param.renderer.domElement.clientHeight - rect.bottom;
 
             camera.aspect = width / height
             camera.updateProjectionMatrix()
 
-            this.param.renderer.setViewport(left, top, width, height)
-            this.param.renderer.setScissor(left, top, width, height)
+            this.param.renderer.setViewport(left, bottom, width, height)
+            this.param.renderer.setScissor(left, bottom, width, height)
 
-            if(composer !== null || composer !== undefined) {
+            if(composer !== null || composer !== undefined){
                 this.param.renderer.autoClear = false
                 this.param.renderer.clear()
 
