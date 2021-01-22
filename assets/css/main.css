@@ -1,0 +1,36 @@
+/* init */
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background: black;
+    overflow: hidden;
+}
+
+
+/* canvas */
+canvas#canvas{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+/* ui */
+div.ui-dna{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 34vh;
+    height: 75vh;
+    transform: translate(-50%, -50%);
+}
+div.ui-dna-object{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 65%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+}

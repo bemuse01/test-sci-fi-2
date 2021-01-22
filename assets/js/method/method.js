@@ -1,0 +1,3 @@
+const METHOD = {
+    object: {}
+}
