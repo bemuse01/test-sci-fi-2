@@ -4,10 +4,10 @@ METHOD.object.dna = {
             bone: [],
             nucleic: []
         }
-        for(let i = 0; i < param.count; i++) opacity.bone[i] = 1.0
+        for(let i = 0; i < param.count; i++) opacity.bone[i] = 0
         for(let i = 0; i < param.count / param.div; i++) for(let j = 0; j < param.point; j++){
             const index = j + i * param.point
-            opacity.nucleic[index] = 1.0
+            opacity.nucleic[index] = 0
         }
         return {bone: new Float32Array(opacity.bone), nucleic: new Float32Array(opacity.nucleic)}
     },

@@ -3,6 +3,7 @@ CLASS.object.dna.build = class{
         this.#init(app)
         this.#create()
         this.#render()
+        this.#createTween()
     }
 
 
@@ -104,11 +105,48 @@ CLASS.object.dna.build = class{
         direction.forEach(e => new CLASS.object.dna.nucleic(this.group.body, param, e, opacity))
     }
     // particle
+    #createParticle(){
+        
+    }
 
+
+    // tween
+    #createTween(){
+        for(let g in this.opacity.body){
+            for(let o in this.opacity.body[g]){
+                const easing = BezierEasing(...TIME.dna.object.easing[o])
+                const time = 1 / this.opacity.body[g][o].length
+                const temp = []
+                for(let i = 0; i < this.opacity.body[g][o].length; i++) temp[i] = i
+                const index = METHOD.object.util.shuffle(temp)
+
+                for(let i = 0; i < this.opacity.body[g][o].length; i++){
+                    const bezier = easing(i * time)
+                    const start = {opacity: 0}, end = {opacity: this.param.body.big.opacity}
+
+                    const tw = new TWEEN.Tween(start)
+                    .to(end, TIME.dna.object.transition)
+                    .onUpdate(() => this.#updateTween(this.opacity.body[g][o], index[i], start))
+                    .delay(TIME.dna.object.start[o] + TIME.dna.object.duration[o] * bezier)
+                    .start()
+                }
+            }
+        }
+    }
+    #updateTween(e, i, start){
+        e[i] = start.opacity
+    }
+    #updateOpacity(){
+        this.group.body.children.forEach(e => {
+            e.geometry.attributes.opacity.needsUpdate = true
+        })
+    }
+    
 
     // animate
     animate(){
         this.#rotateY()
+        this.#updateOpacity()
     }
     #rotateY(){
         this.build.rotation.x += 0.02
