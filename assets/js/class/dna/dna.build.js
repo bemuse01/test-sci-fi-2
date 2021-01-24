@@ -13,7 +13,8 @@ CLASS.object.dna.build = class{
             body: {
                 big: new PARAM.object.dna.body(), 
                 small: new PARAM.object.dna.body({size: 1.125, rand: {bone: 8.0, nucleic: 7.0}, point: 60})
-            }
+            },
+            particle: new PARAM.object.dna.particle()
         }
 
         this.opacity = {
@@ -44,7 +45,7 @@ CLASS.object.dna.build = class{
         this.scene = new THREE.Scene()
         this.camera = new THREE.PerspectiveCamera(camera.fov, width / height, camera.near, camera.far)
         this.camera.position.z = camera.cameraPos
-        console.log(width, height)
+
     }
     #initComposer(app){
         this.bloom = 1.25
@@ -84,6 +85,7 @@ CLASS.object.dna.build = class{
     // create
     #create(){
         this.#createBody()
+        this.#createParticle()
     }
     // body
     #createBody(){
@@ -106,7 +108,7 @@ CLASS.object.dna.build = class{
     }
     // particle
     #createParticle(){
-        
+        this.particle = new CLASS.object.dna.particle(this.group.particle, this.param.particle, this.camera)
     }
 
 
@@ -147,9 +149,10 @@ CLASS.object.dna.build = class{
     animate(){
         this.#rotateY()
         this.#updateOpacity()
+        this.particle.animate()
     }
     #rotateY(){
-        this.build.rotation.x += 0.02
+        this.group.body.rotation.x += 0.02
     }
 
 
@@ -162,5 +165,7 @@ CLASS.object.dna.build = class{
         this.composer.setSize(width, height)
 
         this.fxaa.uniforms['resolution'].value.set(1 / width, 1 / height)
+
+        this.particle.resize(this.camera)
     }
 }
