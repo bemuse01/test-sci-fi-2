@@ -1,1 +1,3 @@
-const SHADER = {}
+const SHADER = {
+    dna: {}
+}

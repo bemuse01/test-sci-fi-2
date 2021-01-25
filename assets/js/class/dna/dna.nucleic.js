@@ -40,8 +40,8 @@ CLASS.object.dna.nucleic = class{
 
     #createMaterial(param){
         const material = new THREE.ShaderMaterial({
-            vertexShader: SHADER.dna.vertex,
-            fragmentShader: SHADER.dna.fragment,
+            vertexShader: SHADER.dna.body.vertex,
+            fragmentShader: SHADER.dna.body.fragment,
             transparent: true,
             uniforms: {
                 color: {value: new THREE.Color(param.color.nucleic)}
