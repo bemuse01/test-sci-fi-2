@@ -127,7 +127,7 @@ CLASS.object.dna.build = class{
                     const start = {opacity: 0}, end = {opacity: this.param.body.big.opacity}
 
                     const tw = new TWEEN.Tween(start)
-                    .to(end, TIME.dna.object.transition)
+                    .to(end, TIME.dna.object.transition.body)
                     .onUpdate(() => this.#updateTween(this.opacity.body[g][o], index[i], start))
                     .delay(TIME.dna.object.start[o] + TIME.dna.object.duration[o] * bezier)
                     .start()

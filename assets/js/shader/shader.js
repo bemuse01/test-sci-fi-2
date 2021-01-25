@@ -1,3 +1,5 @@
 const SHADER = {
-    dna: {}
+    dna: {
+        particle: {}
+    }
 }

@@ -2,13 +2,18 @@ TIME.dna = {
     object: {
         start: {
             bone: 500,
-            nucleic: 500
+            nucleic: 500,
+            particle: 500
         },
-        transition: 100,
+        transition: {
+            body: 100,
+            particle: 300
+        },
         duration: {
             bone: 1200,
             nucleic: 1200
         },
+        delay: 10,
         easing: {
             bone: [0.250, 0.250, 0.750, 0.750],
             nucleic: [0.250, 0.250, 0.750, 0.750]

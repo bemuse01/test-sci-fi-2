@@ -103,7 +103,7 @@ METHOD.object.dna = {
         }
     },
     createPoint(param, view, attr){
-        const position = []
+        const position = [], size = []
         for(let i = 0; i < param.particles; i ++){
             const x = Math.random() * view.width - view.width / 2
             const y = Math.random() * view.height * param.rd - (view.height / 2) * param.rd
@@ -117,7 +117,10 @@ METHOD.object.dna = {
                 velocity: new THREE.Vector3(Math.random() * param.vel - param.vel / 2, Math.random() * param.vel - param.vel / 2, 0),
                 connention: 0
             })
+
+            size[i] = param.size
         }
         attr.point.position = new Float32Array(position)
+        attr.point.size = new Float32Array(size)
     }
 }

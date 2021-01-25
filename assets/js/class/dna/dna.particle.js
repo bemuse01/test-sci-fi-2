@@ -3,6 +3,7 @@ CLASS.object.dna.particle = class{
         this.#init(param, camera)
         this.#create()
         this.#add(group)
+        this.#createTween()
     }
 
     #init(param, camera){
@@ -11,6 +12,8 @@ CLASS.object.dna.particle = class{
             width: METHOD.object.util.getVisibleWidth(camera, 0),
             height: METHOD.object.util.getVisibleHeight(camera, 0)
         }
+        this.play = false
+        this.lineOpacity = 0
     }
 
     #add(group){
@@ -35,6 +38,7 @@ CLASS.object.dna.particle = class{
             point: {
                 position: null,
                 opacity: new Float32Array(this.param.particles),
+                size: null,
                 data: []
             },
             line: {
@@ -53,6 +57,8 @@ CLASS.object.dna.particle = class{
 
         this.geometry.point.setDrawRange(0, this.param.particles)
         this.geometry.point.setAttribute('position', new THREE.BufferAttribute(this.attr.point.position, 3).setUsage(THREE.DynamicDrawUsage))
+        this.geometry.point.setAttribute('opacity', new THREE.BufferAttribute(this.attr.point.opacity, 1))
+        this.geometry.point.setAttribute('vSize', new THREE.BufferAttribute(this.attr.point.size, 1))
 
         this.geometry.line.setAttribute('position', new THREE.BufferAttribute(this.attr.line.position, 3).setUsage(THREE.DynamicDrawUsage))
         this.geometry.line.setAttribute('opacity', new THREE.BufferAttribute(this.attr.line.opacity, 1).setUsage(THREE.DynamicDrawUsage))
@@ -60,21 +66,62 @@ CLASS.object.dna.particle = class{
 
     #createMaterial(){
         this.material = { 
-            point: new THREE.PointsMaterial({
-                color: this.param.color,
+            // point: new THREE.PointsMaterial({
+            //     color: this.param.color,
+            //     transparent: true,
+            //     opacity: this.param.opacity.point,
+            //     size: 1.0
+            // }),
+            point: new THREE.ShaderMaterial({
+                vertexShader: SHADER.dna.particle.point.vertex,
+                fragmentShader: SHADER.dna.particle.point.fragment,
                 transparent: true,
-                opacity: this.param.opacity.point,
-                size: 1.0
+                uniforms: {
+                    color: {value: new THREE.Color(this.param.color)}
+                }
             }),
             line: new THREE.ShaderMaterial({
-                vertexShader: SHADER.dna.particle.vertex,
-                fragmentShader: SHADER.dna.particle.fragment,
+                vertexShader: SHADER.dna.particle.line.vertex,
+                fragmentShader: SHADER.dna.particle.line.fragment,
                 transparent: true,
                 uniforms: {
                     color: {value: new THREE.Color(this.param.color)}
                 }
             })
         }
+    }
+
+    #createTween(){
+        this.#createPointTween()
+    }
+    #createPointTween(){
+        for(let i = 0; i < this.attr.point.opacity.length; i++){
+            const start = {opacity: 0}, end = {opacity: this.param.opacity.point}
+
+            const tw = new TWEEN.Tween(start)
+            .to(end, TIME.dna.object.transition.particle)
+            .onUpdate(() => this.#updatePointTween(this.attr.point.opacity, i, start))
+            .onComplete(() => {if(i === this.attr.point.opacity.length - 1) this.#completeTween()})
+            .delay(TIME.dna.object.start.particle + TIME.dna.object.delay * i)
+            .start()
+        }
+    }
+    #createLineTween(){
+        const start = {opacity: 0}, end = {opacity: this.param.opacity.line}
+
+        const tw = new TWEEN.Tween(start)
+        .to(end, TIME.dna.object.transition.particle)
+        .onUpdate(() => this.#updateLineTween(start))
+        .start()
+    }
+    #updatePointTween(e, i, start){
+        e[i] = start.opacity
+    }
+    #updateLineTween(start){
+        this.lineOpacity = start.opacity
+    }
+    #completeTween(){
+        this.#createLineTween()
     }
 
     animate(){
@@ -91,7 +138,7 @@ CLASS.object.dna.particle = class{
 
             if(point.position[i * 3] <= -this.view.width / 2 || point.position[i * 3] >= this.view.width / 2) point.data[i].velocity.x *= -1
             if(point.position[i * 3 + 1] <= -(this.view.height / 2) * this.param.rd || point.position[i * 3 + 1] >= (this.view.height / 2) * this.param.rd) point.data[i].velocity.y *= -1
-            
+
             for(let j = i + 1; j < this.param.particles; j++){
                 const dx = point.position[i * 3] - point.position[j * 3]
                 const dy = point.position[i * 3 + 1] - point.position[j * 3 + 1]
@@ -100,7 +147,7 @@ CLASS.object.dna.particle = class{
                 const dist = Math.sqrt(dx * dx + dy * dy)
 
                 if(dist < this.param.minDistance){
-                    const alpha = this.param.opacity.line - dist / this.param.minDistance
+                    const alpha = this.lineOpacity - dist / this.param.minDistance
 
                     line.position[vertexPos++] = point.position[i * 3]
                     line.position[vertexPos++] = point.position[i * 3 + 1]
@@ -116,9 +163,9 @@ CLASS.object.dna.particle = class{
                     connection++
                 }
             }
-
         }
         this.geometry.point.attributes.position.needsUpdate = true
+        this.geometry.point.attributes.opacity.needsUpdate = true
 
         this.geometry.line.setDrawRange(0, connection * 2)
         this.geometry.line.attributes.position.needsUpdate = true
