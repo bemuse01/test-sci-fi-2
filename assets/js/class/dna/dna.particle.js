@@ -63,7 +63,7 @@ CLASS.object.dna.particle = class{
             point: new THREE.PointsMaterial({
                 color: this.param.color,
                 transparent: true,
-                opacity: this.param.opacity,
+                opacity: this.param.opacity.point,
                 size: 1.0
             }),
             line: new THREE.ShaderMaterial({
@@ -74,11 +74,6 @@ CLASS.object.dna.particle = class{
                     color: {value: new THREE.Color(this.param.color)}
                 }
             })
-            // line: new THREE.LineBasicMaterial({
-            //     vertexColors: true,
-            //     blending: THREE.AdditiveBlending,
-            //     transparent: true
-            // })
         }
     }
 
@@ -105,10 +100,7 @@ CLASS.object.dna.particle = class{
                 const dist = Math.sqrt(dx * dx + dy * dy)
 
                 if(dist < this.param.minDistance){
-                    // particleData.numConnections ++
-                    // particleDataB.numConnections ++
-
-                    const alpha = this.param.opacity - dist / this.param.minDistance
+                    const alpha = this.param.opacity.line - dist / this.param.minDistance
 
                     line.position[vertexPos++] = point.position[i * 3]
                     line.position[vertexPos++] = point.position[i * 3 + 1]
