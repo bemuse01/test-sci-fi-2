@@ -1,10 +1,10 @@
 PARAM.object.dna.body = class{
     constructor(param = {}){
-        this.count = param.count || 120
+        this.count = param.count || 160
         // this.gap = param.gap || 0.6
         // this.dist = param.dist || 9
         // this.deg = param.deg || 2
-        this.gap = param.gap || 1.2
+        // this.gap = param.gap || 1.2
         this.dist = param.dist || 21
         this.deg = param.deg || 2
         this.size = param.size || 2.5
@@ -23,5 +23,6 @@ PARAM.object.dna.body = class{
         this.div = param.div || 10
         this.layers = param.layers || PROCESS
         this.rotate = param.rotate || 0.01
+        this.rd = param.rd || 0.8
     }
 }

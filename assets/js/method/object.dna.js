@@ -11,7 +11,8 @@ METHOD.object.dna = {
         }
         return {bone: new Float32Array(opacity.bone), nucleic: new Float32Array(opacity.nucleic)}
     },
-    createDnaBone(param, direction, attr){
+    createDnaBone(param, direction, attr, width){
+        const gap = (width * param.rd) / (param.count * 2 + param.rand.bone)
         const position = [], size = []
         let tb = 1, dir = 1, degree = 0
 
@@ -44,7 +45,7 @@ METHOD.object.dna = {
             }
             const x = Math.cos(i * tb * param.deg * radian) * param.dist * dir + rand.x
             const y = Math.sin((i * tb * param.deg + (degree * tb)) * radian) * param.dist + rand.y
-            const z = i * param.gap * tb + rand.z
+            const z = i * gap * tb + rand.z
             position[i * 3] = x
             position[i * 3 + 1] = y
             position[i * 3 + 2] = z
@@ -56,7 +57,8 @@ METHOD.object.dna = {
         attr.position = new Float32Array(position)
         attr.size = new Float32Array(size)
     },
-    createDnaNucleic(param, direction, attr){
+    createDnaNucleic(param, direction, attr, width){
+        const gap = (width * param.rd) / (param.count * 2 + param.rand.bone)
         const position = [], size = []
         let tb = 1, idx = 0
         
@@ -76,7 +78,7 @@ METHOD.object.dna = {
                 norm: Math.sin(deg * radian) * param.dist,
                 rev: Math.sin((deg + (180 * tb)) * radian) * param.dist
             }
-            const boneZ = (i * param.div) * param.gap * tb
+            const boneZ = (i * param.div) * gap * tb
             
             const m = (boneY.rev - boneY.norm) / (boneX.rev - boneX.norm)
             const xgap = Math.abs(boneX.rev - boneX.norm)

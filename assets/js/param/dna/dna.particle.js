@@ -1,6 +1,6 @@
 PARAM.object.dna.particle = class{
     constructor(param = {}){
-        this.particles = param.particles || 150
+        this.particles = param.particles || 250
         this.color = param.color || {
             point: 0x10d8fa,
             line: 0x10d8fa
@@ -9,7 +9,7 @@ PARAM.object.dna.particle = class{
             point: 0.4,
             line: 0.2
         }
-        this.rd = param.rd || 0.65
+        this.rd = param.rd || 0.75
         this.vel = param.vel || 0.4
         this.minDistance = param.minDistance || 150
         this.size = 2.5

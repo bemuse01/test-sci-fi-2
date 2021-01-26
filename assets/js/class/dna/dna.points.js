@@ -15,6 +15,7 @@ CLASS.object.dna.points = class{
 
     #add(group){
        for(let i in this.mesh) group.add(this.mesh[i])
+       group.position.y = this.param.groupPos
     }
 
     #create(){

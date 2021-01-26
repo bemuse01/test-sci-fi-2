@@ -16,7 +16,7 @@ TIME.dna = {
             bone: 1200,
             nucleic: 1200
         },
-        delay: 10,
+        delay: 6,
         easing: {
             bone: [0.250, 0.250, 0.750, 0.750],
             nucleic: [0.250, 0.250, 0.750, 0.750]

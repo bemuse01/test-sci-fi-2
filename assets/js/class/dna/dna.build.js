@@ -48,6 +48,10 @@ CLASS.object.dna.build = class{
         this.camera = new THREE.PerspectiveCamera(camera.fov, width / height, camera.near, camera.far)
         this.camera.position.z = camera.cameraPos
 
+        this.view = {
+            sWidth: METHOD.object.util.getVisibleWidth(this.camera, 0),
+            dWidth: 0
+        }
     }
     #initComposer(app){
         this.bloom = 1.25
@@ -102,12 +106,12 @@ CLASS.object.dna.build = class{
     #createBone(param, opacity){
         const direction  = ['bottom-normal', 'bottom-reverse', 'top-normal', 'top-reverse']
 
-        direction.forEach(e => new CLASS.object.dna.bone(this.group.body, param, e, opacity))
+        direction.forEach(e => new CLASS.object.dna.bone(this.group.body, param, e, opacity, this.camera))
     }
     #createNucleic(param, opacity){
         const direction = ['bottom', 'top']
 
-        direction.forEach(e => new CLASS.object.dna.nucleic(this.group.body, param, e, opacity))
+        direction.forEach(e => new CLASS.object.dna.nucleic(this.group.body, param, e, opacity, this.camera))
     }
     // particle
     #createParticle(){
@@ -175,5 +179,17 @@ CLASS.object.dna.build = class{
         this.fxaa.uniforms['resolution'].value.set(1 / width, 1 / height)
 
         this.particle.resize(this.camera)
+
+        this.#resizeBody()
+    }
+    #resizeBody(){
+        this.view.dWidth = METHOD.object.util.getVisibleWidth(this.camera, 0)
+
+        let ratio = this.view.dWidth / this.view.sWidth
+
+        ratio = Math.max(ratio, 0.6)
+        ratio = Math.min(ratio, 1.5)
+
+        this.group.body.scale.set(ratio, 1, 1)
     }
 }

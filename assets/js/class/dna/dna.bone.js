@@ -1,7 +1,15 @@
 CLASS.object.dna.bone = class{
-    constructor(group, param, direction, opacity){
+    constructor(group, param, direction, opacity, camera){
+        this.#init(camera)
         this.#create(param, direction, opacity)
         this.#add(group)
+    }
+
+    #init(camera){
+        this.view = {
+            sWidth: METHOD.object.util.getVisibleWidth(camera, 0),
+            dWidth: 0
+        }
     }
 
     #add(group){
@@ -29,7 +37,7 @@ CLASS.object.dna.bone = class{
             size: null
         }
 
-        METHOD.object.dna.createDnaBone(param, direction, this.attr)
+        METHOD.object.dna.createDnaBone(param, direction, this.attr, this.view.sWidth)
 
         geometry.setAttribute('position', new THREE.BufferAttribute(this.attr.position, 3))
         geometry.setAttribute('opacity', new THREE.BufferAttribute(opacity.bone, 1))

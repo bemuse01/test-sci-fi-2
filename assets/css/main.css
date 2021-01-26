@@ -22,8 +22,9 @@ div.ui-dna{
     position: absolute;
     top: 0;
     left: 50%;
-    width: 150vh;
-    height: 70vh;
+    width: 95vw;
+    /* width: 160vh; */
+    height: 60vh;
     transform: translate(-50%, 0);
 }
 div.ui-dna-object{
