@@ -77,7 +77,7 @@ CLASS.object.dna.particle = class{
                 fragmentShader: SHADER.dna.particle.point.fragment,
                 transparent: true,
                 uniforms: {
-                    color: {value: new THREE.Color(this.param.color)}
+                    color: {value: new THREE.Color(this.param.color.point)}
                 }
             }),
             line: new THREE.ShaderMaterial({
@@ -85,7 +85,7 @@ CLASS.object.dna.particle = class{
                 fragmentShader: SHADER.dna.particle.line.fragment,
                 transparent: true,
                 uniforms: {
-                    color: {value: new THREE.Color(this.param.color)}
+                    color: {value: new THREE.Color(this.param.color.line)}
                 }
             })
         }
@@ -99,7 +99,7 @@ CLASS.object.dna.particle = class{
             const start = {opacity: 0}, end = {opacity: this.param.opacity.point}
 
             const tw = new TWEEN.Tween(start)
-            .to(end, TIME.dna.object.transition.particle)
+            .to(end, TIME.dna.object.transition.particle.point)
             .onUpdate(() => this.#updatePointTween(this.attr.point.opacity, i, start))
             .onComplete(() => {if(i === this.attr.point.opacity.length - 1) this.#completeTween()})
             .delay(TIME.dna.object.start.particle + TIME.dna.object.delay * i)
@@ -110,7 +110,7 @@ CLASS.object.dna.particle = class{
         const start = {opacity: 0}, end = {opacity: this.param.opacity.line}
 
         const tw = new TWEEN.Tween(start)
-        .to(end, TIME.dna.object.transition.particle)
+        .to(end, TIME.dna.object.transition.particle.line)
         .onUpdate(() => this.#updateLineTween(start))
         .start()
     }

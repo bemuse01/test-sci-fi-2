@@ -14,7 +14,8 @@ CLASS.object.dna.build = class{
                 big: new PARAM.object.dna.body(), 
                 small: new PARAM.object.dna.body({size: 1.125, rand: {bone: 8.0, nucleic: 7.0}, point: 60})
             },
-            particle: new PARAM.object.dna.particle()
+            particle: new PARAM.object.dna.particle(),
+            points: new PARAM.object.dna.points()
         }
 
         this.opacity = {
@@ -31,7 +32,8 @@ CLASS.object.dna.build = class{
     #initGroup(){
         this.group = {
             body: new THREE.Group(),
-            particle: new THREE.Group()
+            particle: new THREE.Group(),
+            points: new THREE.Group()
         }
 
         this.build = new THREE.Group()
@@ -86,6 +88,7 @@ CLASS.object.dna.build = class{
     #create(){
         this.#createBody()
         this.#createParticle()
+        this.#createPoints()
     }
     // body
     #createBody(){
@@ -109,6 +112,10 @@ CLASS.object.dna.build = class{
     // particle
     #createParticle(){
         this.particle = new CLASS.object.dna.particle(this.group.particle, this.param.particle, this.camera)
+    }
+    // points
+    #createPoints(){
+        this.points = new CLASS.object.dna.points(this.group.points, this.param.points, this.camera)
     }
 
 
@@ -150,6 +157,7 @@ CLASS.object.dna.build = class{
         this.#rotateY()
         this.#updateOpacity()
         this.particle.animate()
+        this.points.animate()
     }
     #rotateY(){
         this.group.body.rotation.x += 0.02

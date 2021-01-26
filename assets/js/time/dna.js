@@ -7,7 +7,10 @@ TIME.dna = {
         },
         transition: {
             body: 100,
-            particle: 300
+            particle: {
+                point: 300,
+                line: 600
+            }
         },
         duration: {
             bone: 1200,

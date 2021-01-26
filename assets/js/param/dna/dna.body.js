@@ -7,11 +7,11 @@ PARAM.object.dna.body = class{
         this.gap = param.gap || 1.2
         this.dist = param.dist || 21
         this.deg = param.deg || 2
-        this.size = param.size || 2.8
+        this.size = param.size || 2.5
         this.opacity = param.opacity || 1.0
         this.color = param.color || {
             bone: 0xffffff,
-            nucleic: 0x73eaff
+            nucleic: 0x10d8fa
         }
         this.rand = param.rand || {
             bone: 3.5,

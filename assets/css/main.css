@@ -20,11 +20,11 @@ canvas#canvas{
 /* ui */
 div.ui-dna{
     position: absolute;
-    top: 50%;
+    top: 0;
     left: 50%;
     width: 150vh;
     height: 70vh;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
 }
 div.ui-dna-object{
     position: absolute;
