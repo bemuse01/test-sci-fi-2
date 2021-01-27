@@ -29,6 +29,7 @@
         <script src="assets/js/param/dna/dna.body.js"></script>
         <script src="assets/js/param/dna/dna.particle.js"></script>
         <script src="assets/js/param/dna/dna.points.js"></script>
+        <script src="assets/js/param/dna/dna.element.sideNumber.js"></script>
 
         <!-- time -->
         <script src="assets/js/time/time.js"></script>
@@ -48,12 +49,15 @@
 
         <!-- class -->
         <script src="assets/js/class/class.js"></script>
+        <!-- app -->
         <script src="assets/js/class/app/app.build.js"></script>
+        <!-- dna -->
         <script src="assets/js/class/dna/dna.bone.js"></script>
         <script src="assets/js/class/dna/dna.nucleic.js"></script>
         <script src="assets/js/class/dna/dna.particle.js"></script>
         <script src="assets/js/class/dna/dna.points.js"></script>
         <script src="assets/js/class/dna/dna.build.js"></script>
+        <script src="assets/js/class/dna/dna.element.js"></script>
         
         <!-- css -->
         <link href="assets/css/main.css" rel="stylesheet" type="text/css">
@@ -64,9 +68,28 @@
                 <canvas id="canvas"></canvas>
             </div>
             <div class="element">
+                <div class="background"><div></div></div>
                 <div class="ui ui-dna">
                     <div class="ui-dna-object-wrap">
                         <div class="ui-dna-object"></div>
+                    </div>
+                    <div class="ui-dna-side-number">
+                        <div class="dna-side-number dna-side-number-left-wrap">
+                            <div class="dna-side-number-left"
+                                v-for="i in element.dna.sideNumber.left"
+                                :key="i.id"
+                                :style="i.style.parent"
+                            ><span>{{i.text}}</span>                                
+                            </div>
+                        </div>
+                        <div class="dna-side-number dna-side-number-right-wrap">
+                            <div class="dna-side-number-right"
+                                v-for="i in element.dna.sideNumber.right"
+                                :key="i.id"
+                                :style="i.style.parent"
+                            ><span>{{i.text}}</span>                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

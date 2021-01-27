@@ -106,9 +106,9 @@ METHOD.object.dna = {
     },
     createPoint(param, view, attr){
         const position = [], size = []
-        for(let i = 0; i < param.particles; i ++){
-            const x = Math.random() * view.width - view.width / 2
-            const y = Math.random() * view.height * param.rd - (view.height / 2) * param.rd
+        for(let i = 0; i < param.particles; i++){
+            const x = Math.random() * view.width * param.rd.width - (view.width / 2) * param.rd.width
+            const y = Math.random() * view.height * param.rd.height - (view.height / 2) * param.rd.height
             const z = 0
 
             position[i * 3]  = x

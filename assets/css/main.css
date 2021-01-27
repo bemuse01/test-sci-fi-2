@@ -1,3 +1,9 @@
+@font-face{
+    src: url('../font/OpenSans-Light.ttf');
+    font-family: OpenSansLight;
+}
+
+
 /* init */
 *{
     padding: 0;
@@ -14,6 +20,18 @@ canvas#canvas{
     position: absolute;
     top: 0;
     left: 0;
+}
+
+
+/* background */
+div.background > div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('../src/bg.png') no-repeat center center / cover;
+    opacity: 0.5;
 }
 
 
@@ -34,4 +52,29 @@ div.ui-dna-object{
     width: 100%;
     height: 100%;
     transform: translate(-50%, -50%);
+}
+div.ui-dna-side-number{
+    width: 100%;
+    height: 100%;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: OpenSansLight;
+    font-size: 0.9vh;
+}
+div.dna-side-number{
+    position: absolute;
+    top: 0;
+    width: auto;
+    height: 100%;
+}
+div.dna-side-number span{
+    position: relative;
+    top: 25%;
+    left: 0;
+    transform: translate(0, -50%);
+}
+div.dna-side-number-left-wrap{
+    left: 0;
+}
+div.dna-side-number-right-wrap{
+    right: 0;
 }

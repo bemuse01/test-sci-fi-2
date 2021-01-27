@@ -50,7 +50,9 @@ CLASS.object.dna.build = class{
 
         this.view = {
             sWidth: METHOD.object.util.getVisibleWidth(this.camera, 0),
-            dWidth: 0
+            dWidth: 0,
+            sHeight: METHOD.object.util.getVisibleHeight(this.camera, 0),
+            dHeight: 0
         }
     }
     #initComposer(app){
@@ -92,7 +94,7 @@ CLASS.object.dna.build = class{
     #create(){
         this.#createBody()
         this.#createParticle()
-        this.#createPoints()
+        // this.#createPoints()
     }
     // body
     #createBody(){
@@ -161,7 +163,7 @@ CLASS.object.dna.build = class{
         this.#rotateY()
         this.#updateOpacity()
         this.particle.animate()
-        this.points.animate()
+        // this.points.animate()
     }
     #rotateY(){
         this.group.body.rotation.x += 0.02
@@ -184,12 +186,16 @@ CLASS.object.dna.build = class{
     }
     #resizeBody(){
         this.view.dWidth = METHOD.object.util.getVisibleWidth(this.camera, 0)
+        this.view.dHeight = METHOD.object.util.getVisibleHeight(this.camera, 0)
 
-        let ratio = this.view.dWidth / this.view.sWidth
+        let wRatio = this.view.dWidth / this.view.sWidth, hRatio = this.view.dHeight / this.view.sHeight
 
-        ratio = Math.max(ratio, 0.6)
-        ratio = Math.min(ratio, 1.5)
+        wRatio = Math.max(wRatio, 0.6)
+        wRatio = Math.min(wRatio, 1.5)
 
-        this.group.body.scale.set(ratio, 1, 1)
+        hRatio = Math.max(hRatio, 0.8)
+        hRatio = Math.min(hRatio, 1.2)
+
+        this.group.body.scale.set(wRatio, hRatio, 1)
     }
 }

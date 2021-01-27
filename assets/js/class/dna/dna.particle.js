@@ -136,8 +136,8 @@ CLASS.object.dna.particle = class{
             point.position[i * 3 + 1] += point.data[i].velocity.y
             // point.position[i * 3 + 2] += point.data[i].z
 
-            if(point.position[i * 3] <= -this.view.width / 2 || point.position[i * 3] >= this.view.width / 2) point.data[i].velocity.x *= -1
-            if(point.position[i * 3 + 1] <= -(this.view.height / 2) * this.param.rd || point.position[i * 3 + 1] >= (this.view.height / 2) * this.param.rd) point.data[i].velocity.y *= -1
+            if(point.position[i * 3] <= -(this.view.width / 2) * this.param.rd.width || point.position[i * 3] >= (this.view.width / 2) * this.param.rd.width) point.data[i].velocity.x *= -1
+            if(point.position[i * 3 + 1] <= -(this.view.height / 2) * this.param.rd.height || point.position[i * 3 + 1] >= (this.view.height / 2) * this.param.rd.height) point.data[i].velocity.y *= -1
 
             for(let j = i + 1; j < this.param.particles; j++){
                 const dx = point.position[i * 3] - point.position[j * 3]
@@ -175,5 +175,15 @@ CLASS.object.dna.particle = class{
     resize(camera){
         this.view.width = METHOD.object.util.getVisibleWidth(camera, 0)
         this.view.height = METHOD.object.util.getVisibleHeight(camera, 0)
+
+        for(let i = 0; i < this.param.particles; i++){
+            const x = Math.random() * this.view.width * this.param.rd.width - (this.view.width / 2) * this.param.rd.width
+            const y = Math.random() * this.view.height * this.param.rd.height - (this.view.height / 2) * this.param.rd.height
+            const z = 0
+
+            this.attr.point.position[i * 3] = x
+            this.attr.point.position[i * 3 + 1] = y
+            this.attr.point.position[i * 3 + 2] = z
+        }
     }
 }

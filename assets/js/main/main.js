@@ -1,7 +1,11 @@
 new Vue({
     el: '#wrap',
     data(){
-
+        return{
+            element: {
+                dna: new CLASS.element.dna()
+            }
+        }
     },
     mounted(){
         this.init()
