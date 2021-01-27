@@ -5,7 +5,7 @@ PARAM.object.dna.body = class{
         // this.dist = param.dist || 9
         // this.deg = param.deg || 2
         // this.gap = param.gap || 1.2
-        this.dist = param.dist || 23
+        this.dist = param.dist || 27
         this.deg = param.deg || 2
         this.size = param.size || 2.5
         this.opacity = param.opacity || 1.0
@@ -23,6 +23,6 @@ PARAM.object.dna.body = class{
         this.div = param.div || 10
         this.layers = param.layers || PROCESS
         this.rotate = param.rotate || 0.01
-        this.rd = param.rd || 0.8
+        this.rd = param.rd || 0.7
     }
 }

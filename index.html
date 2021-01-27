@@ -75,19 +75,19 @@
                     </div>
                     <div class="ui-dna-side-number">
                         <div class="dna-side-number dna-side-number-left-wrap">
-                            <div class="dna-side-number-left"
+                            <div class="dna-side-numbers"
                                 v-for="i in element.dna.sideNumber.left"
                                 :key="i.id"
                                 :style="i.style.parent"
-                            ><span>{{i.text}}</span>                                
+                            ><span :style="i.style.child">{{i.text}}</span>                                
                             </div>
                         </div>
                         <div class="dna-side-number dna-side-number-right-wrap">
-                            <div class="dna-side-number-right"
+                            <div class="dna-side-numbers"
                                 v-for="i in element.dna.sideNumber.right"
                                 :key="i.id"
                                 :style="i.style.parent"
-                            ><span>{{i.text}}</span>                                
+                            ><span :style='i.style.child'>{{i.text}}</span>                                
                             </div>
                         </div>
                     </div>

@@ -52,6 +52,7 @@ new Vue({
         render(){
             this.renderThree()
             TWEEN.update()
+            for(let i in this.element) this.element[i].animate()
         },
         animate(){
             this.render()

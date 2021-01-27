@@ -11,10 +11,10 @@ PARAM.object.dna.particle = class{
         }
         this.rd = param.rd || {
             width: 0.9,
-            height: 0.7
+            height: 0.8
         }
         this.vel = param.vel || 0.4
-        this.minDistance = param.minDistance || 180
+        this.minDistance = param.minDistance || 200
         this.size = 2.5
     }
 }
