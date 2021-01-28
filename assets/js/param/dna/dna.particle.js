@@ -6,12 +6,12 @@ PARAM.object.dna.particle = class{
             line: 0x10d8fa
         }
         this.opacity = param.opacity || {
-            point: 0.4,
-            line: 0.2
+            point: 0.5,
+            line: 0.25
         }
         this.rd = param.rd || {
-            width: 0.9,
-            height: 0.8
+            width: 1.0,
+            height: 1.0
         }
         this.vel = param.vel || 0.4
         this.minDistance = param.minDistance || 200
